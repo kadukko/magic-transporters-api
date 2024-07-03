@@ -18,6 +18,7 @@ model MagicMover {
   weightLimit   Float
   energy        Int
   questState    QuestState
+  missions      MagicMission[]
 }
 
 enum QuestState {
@@ -31,5 +32,23 @@ model MagicItem {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   weight        Float
+  missions      MagicItemsOnMission[]
 }
 
+model MagicMission {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  moverId       String  @db.ObjectId
+  mover         MagicMover @relation(fields: [moverId], references: [id])
+  items         MagicItemsOnMission[]
+  startedAt     DateTime?
+  endedAt       DateTime?
+  createdAt     DateTime
+}
+
+model MagicItemsOnMission {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  missionId     String @db.ObjectId
+  mission       MagicMission @relation(fields: [missionId], references: [id])
+  itemId        String @db.ObjectId
+  item          MagicItem @relation(fields: [itemId], references: [id])
+}
