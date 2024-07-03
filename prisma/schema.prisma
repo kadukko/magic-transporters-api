@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model MagicMover {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  weightLimit   Float
+  energy        Int
+  questState    QuestState
+}
+
+enum QuestState {
+  RESTING
+  LOADING
+  ON_A_MISSION
+  DONE
+}
+
+model MagicItem {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  weight        Float
+}
+
