@@ -3,8 +3,8 @@ import MagicItemRepository from "../repositories/MagicItemRepository"
 
 class GetAllMagicItemsController {
   static async handler (req: Request, res: Response) {
-    const movers = await MagicItemRepository.getAll()
-    res.json(movers)
+    const items = await MagicItemRepository.getAll()
+    res.json(items)
   }
 }
 

@@ -14,7 +14,7 @@ const MagicItemRepository = {
 
   async save(item: MagicItem) {
     if (item.id) {
-      await prismaClient.magicItem.update({
+      const doc = await prismaClient.magicItem.update({
         where: {
           id: item.id
         },
@@ -23,13 +23,17 @@ const MagicItemRepository = {
           weight: item.weight
         }
       })
+      
+      return new MagicItem(doc as TMagicItem)
     } else {
-      await prismaClient.magicItem.create({
+      const doc = await prismaClient.magicItem.create({
         data: {
           name: item.name,
           weight: item.weight
         }
       })
+      
+      return new MagicItem(doc as TMagicItem)
     }
   }
 }

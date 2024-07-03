@@ -8,7 +8,7 @@ class CreateMagicMoverController {
   static async handler (req: Request, res: Response) {
     const body = req.body as TRequestBody
     const mover = new MagicMover(body)
-    await MagicMoverRepository.save(mover)
+    res.json(await MagicMoverRepository.save(mover))
   }
 }
 

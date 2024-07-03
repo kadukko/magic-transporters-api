@@ -8,7 +8,7 @@ class CreateMagicItemController {
   static async handler (req: Request, res: Response) {
     const body = req.body as TRequestBody
     const item = new MagicItem(body)
-    await MagicItemRepository.save(item)
+    res.json(await MagicItemRepository.save(item))
   }
 }
 
