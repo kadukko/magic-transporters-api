@@ -6,7 +6,7 @@ import MagicMover from "../entities/MagicMover"
 class GetAllMagicMoversController {
   static async handler (req: Request, res: Response) {
     try {
-      res.json(await this.logic())
+      res.json(await GetAllMagicMoversController.logic())
     } catch (err) {
       res.status(500).send('INTERNAL_ERROR')
       LoggerModule.error(err)

@@ -10,6 +10,8 @@ describe('Create Magic Mover', () => {
       weightLimit: 100
     })
 
+    if (!mover || !mover.id) throw new Error('FAIL')
+
     expect(mover).toBeDefined()
     expect(mover.id).toBeDefined()
 

@@ -8,7 +8,7 @@ class EndMagicMoverMissionController {
   static async handler (req: Request, res: Response) {
     try {
       const { id } = req.params
-      res.json(await this.logic(id))
+      res.json(await EndMagicMoverMissionController.logic(id))
     } catch (err) {
       if (err instanceof APIError) {
         res.status(err.statusCode).send(err.message)

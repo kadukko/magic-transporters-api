@@ -9,7 +9,7 @@ class StartMagicMoverMissionController {
     try {
       const { id } = req.params
 
-      res.json(await this.logic(id))
+      res.json(await StartMagicMoverMissionController.logic(id))
     } catch (err) {
       if (err instanceof APIError) {
         res.status(err.statusCode).send(err.message)

@@ -9,7 +9,7 @@ class GetMagicMoverCurrentMissionController {
   static async handler (req: Request, res: Response) {
     try {
       const { id } = req.params
-      res.json(await this.logic(id))
+      res.json(await GetMagicMoverCurrentMissionController.logic(id))
     } catch (err) {
       if (err instanceof APIError) {
         res.status(err.statusCode).send(err.message)
@@ -33,7 +33,9 @@ class GetMagicMoverCurrentMissionController {
   }
 }
 
-const redactMission = (mission: MagicMission) => {
+const redactMission = (mission: MagicMission | null) => {
+  if (!mission) return null
+
   return {
     ...mission,
     items: mission.items?.map(item => ({

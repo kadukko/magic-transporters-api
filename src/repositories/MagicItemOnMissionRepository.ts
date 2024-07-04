@@ -12,7 +12,7 @@ const MagicItemOnMissionRepository = {
       }
     })
 
-    return new MagicItemOnMission(doc as TMagicItemOnMission)
+    return doc && new MagicItemOnMission(doc as TMagicItemOnMission)
   },
 
   async deleteById (id: string) {
@@ -46,6 +46,8 @@ const MagicItemOnMissionRepository = {
 
       return new MagicItemOnMission(doc as TMagicItemOnMission)
     }
+
+    return null
   }
 }
 

@@ -9,7 +9,7 @@ class CreateMagicItemController {
   static async handler (req: Request, res: Response) {
     try {
       const body = req.body as TRequestBody
-      res.json(await this.logic(body))
+      res.json(await CreateMagicItemController.logic(body))
     } catch (err) {
       res.status(500).send('INTERNAL_ERROR')
       LoggerModule.error(err)

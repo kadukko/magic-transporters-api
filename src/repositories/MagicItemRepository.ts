@@ -9,7 +9,7 @@ const MagicItemRepository = {
 
   async getById(id:string) {
     const doc = await prismaClient.magicItem.findFirst({where: {id}})
-    return new MagicItem(doc as TMagicItem)
+    return doc && new MagicItem(doc as TMagicItem)
   },
 
   async save(item: MagicItem) {
@@ -35,6 +35,8 @@ const MagicItemRepository = {
       
       return new MagicItem(doc as TMagicItem)
     }
+
+    return null
   }
 }
 

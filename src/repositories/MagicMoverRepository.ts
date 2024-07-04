@@ -31,7 +31,8 @@ const MagicMoverRepository = {
       }
     })
 
-    return new MagicMover(doc as TMagicMover)
+
+    return doc && new MagicMover(doc as TMagicMover)
   },
 
   async save(mover: MagicMover) {
@@ -61,6 +62,8 @@ const MagicMoverRepository = {
       
       return new MagicMover(doc as TMagicMover)
     }
+
+    return null
   }
 }
 

@@ -18,7 +18,7 @@ class LoadMagicMoverController {
       const { id } = req.params
       const { itemId } = req.body as TRequestBody
 
-      res.json(await this.logic(id, itemId))
+      res.json(await LoadMagicMoverController.logic(id, itemId))
     } catch (err) {
       if (err instanceof APIError) {
         res.status(err.statusCode).send(err.message)
@@ -52,7 +52,7 @@ class LoadMagicMoverController {
 
       let totalWeight = mission.items?.reduce((prev, next) => prev + next.item.weight, 0) || 0
 
-      if (mover.weightLimit < totalWeight) throw new APIError('WEIGHT_LIMIT_EXCEEDED', 400)
+      if (mover.weightLimit < totalWeight + item.weight) throw new APIError('WEIGHT_LIMIT_EXCEEDED', 400)
 
       itemOnMission = new MagicItemOnMission({
         itemId: item.id,

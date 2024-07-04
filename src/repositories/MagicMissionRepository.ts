@@ -16,7 +16,7 @@ const MagicMissionRepository = {
       }
     })
     
-    return new MagicMission(doc as TMagicMission)
+    return doc && new MagicMission(doc as TMagicMission)
   },
 
   
@@ -54,7 +54,7 @@ const MagicMissionRepository = {
       }
     })
 
-    return new MagicMission(doc as TMagicMission)
+    return doc && new MagicMission(doc as TMagicMission)
   },
 
   async save(mission: MagicMission) {
@@ -71,7 +71,7 @@ const MagicMissionRepository = {
         },
       })
 
-      return new MagicMission(doc as TMagicMission)
+      return doc && new MagicMission(doc as TMagicMission)
     } else {
       const doc = await prismaClient.magicMission.create({
         data: {
@@ -82,8 +82,10 @@ const MagicMissionRepository = {
         }
       })
 
-      return new MagicMission(doc as TMagicMission)
+      return doc &&new MagicMission(doc as TMagicMission)
     }
+
+    return null
   }
 }
 

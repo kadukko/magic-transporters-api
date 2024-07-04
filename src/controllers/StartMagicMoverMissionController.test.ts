@@ -42,7 +42,12 @@ describe('Start Magic Mover Mission', () => {
     await StartMagicMoverMissionController.logic(mover.id)
 
     mission = await MagicMissionRepository.getById(mission.id)
+
+    if (!mission || !mission.id) throw new Error('FAIL')
+
     mover = await MagicMoverRepository.getById(mover.id)
+
+    if (!mover || !mover.id) throw new Error('FAIL')
     
     expect(mission.startedAt).toBeDefined()
     expect(mover.questState).toBe('ON_A_MISSION')

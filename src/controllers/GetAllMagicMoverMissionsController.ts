@@ -2,7 +2,6 @@ import type { Request, Response } from "express"
 import MagicMoverRepository from "../repositories/MagicMoverRepository"
 import LoggerModule from "../modules/LoggerModule"
 import MagicMissionRepository from "../repositories/MagicMissionRepository"
-import MagicItemOnMission from "../entities/MagicItemOnMission"
 import MagicMission from "../entities/MagicMission"
 import APIError from "../classes/errors/APIError"
 
@@ -10,7 +9,7 @@ class GetAllMagicMoverMissionsController {
   static async handler (req: Request, res: Response) {
     try {
       const { id } = req.params
-      res.json(await this.logic(id))
+      res.json(await GetAllMagicMoverMissionsController.logic(id))
     } catch (err) {
       if (err instanceof APIError) {
         res.status(err.statusCode).send(err.message)

@@ -40,6 +40,8 @@ describe('Get Magic Mover Current Mission', () => {
     if (!itemOnMission || !itemOnMission.id) throw new Error('FAIL')
 
     const currentMission = await GetMagicMoverCurrentMissionController.logic(mover.id)
+
+    if (!currentMission || !currentMission.id) throw new Error('FAIL')
     
     expect(currentMission).toBeDefined()
     expect(currentMission.id === mission.id).toBe(true)

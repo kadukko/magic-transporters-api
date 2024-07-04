@@ -27,7 +27,7 @@ describe('Get All Magic Mover Missions', () => {
       createdAt: new Date()
     })
 
-    if (!mission1 || !mission1.id) throw new Error('FAIL')
+    if (!mission2 || !mission2.id) throw new Error('FAIL')
 
     const missions = await GetAllMagicMoverMissionsController.logic(mover.id)
     

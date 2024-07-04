@@ -38,10 +38,17 @@ describe('End Magic Mover Mission', () => {
       createdAt: new Date()
     })
 
+    if (!itemOnMission || !itemOnMission.id) throw new Error('FAIL')
+
     await EndMagicMoverMissionController.logic(mover.id)
 
     mission = await MagicMissionRepository.getById(mission.id)
+
+    if (!mission || !mission.id) throw new Error('FAIL')
+      
     mover = await MagicMoverRepository.getById(mover.id)
+
+    if (!mover || !mover.id) throw new Error('FAIL')
 
     expect(mission.endedAt).toBeDefined()
     expect(mover.questState).toBe('RESTING')

@@ -40,7 +40,7 @@ describe('Unload Magic Mover', () => {
 
     if (!itemOnMission || !itemOnMission.id) throw new Error('FAIL')
 
-    await UnloadMagicMoverController.logic(mover.id, itemOnMission.id)
+    await UnloadMagicMoverController.logic(mover.id, item.id)
 
     mission = await MagicMissionRepository.getLastMissionByMoverId(mover.id)
 

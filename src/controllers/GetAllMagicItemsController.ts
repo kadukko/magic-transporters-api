@@ -5,7 +5,7 @@ import LoggerModule from "../modules/LoggerModule"
 class GetAllMagicItemsController {
   static async handler (req: Request, res: Response) {
     try {
-      res.json(await this.logic())
+      res.json(await GetAllMagicItemsController.logic())
     } catch (err) {
       res.status(500).send('INTERNAL_ERROR')
       LoggerModule.error(err)

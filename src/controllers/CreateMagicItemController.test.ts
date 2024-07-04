@@ -9,6 +9,8 @@ describe('Create Magic Item', () => {
       weight: 10
     })
 
+    if (!item || !item.id) throw new Error('FAIL')
+
     expect(item).toBeDefined()
     expect(item.id).toBeDefined()
 
