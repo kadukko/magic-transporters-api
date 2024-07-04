@@ -38,7 +38,7 @@ class EndMagicMoverMissionController {
 
     await MagicMissionRepository.save(mission)
 
-    mover.questState = 'RESTING'
+    mover.questState = 'DONE'
 
     await MagicMoverRepository.save(mover)
 

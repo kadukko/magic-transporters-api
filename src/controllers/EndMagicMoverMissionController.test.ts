@@ -51,7 +51,7 @@ describe('End Magic Mover Mission', () => {
     if (!mover || !mover.id) throw new Error('FAIL')
 
     expect(mission.endedAt).toBeDefined()
-    expect(mover.questState).toBe('RESTING')
+    expect(mover.questState).toBe('DONE')
 
     await prismaClient.magicItemsOnMission.delete({ where: { id: itemOnMission.id }})
     await prismaClient.magicMission.delete({ where: { id: mission.id }})

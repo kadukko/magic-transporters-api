@@ -61,7 +61,7 @@ class LoadMagicMoverController {
       })
     }
     
-    if (mover.questState === 'RESTING') {
+    if (['RESTING', 'DONE'].includes(mover.questState)) {
       mission = await MagicMissionRepository.save(new MagicMission({
         moverId: mover.id,
         createdAt: new Date()
