@@ -5,7 +5,16 @@ const MagicMoverRepository = {
   async getAll() {
     const docs = await prismaClient.magicMover.findMany({
       include: {
-        _count: true,
+        missions: {
+          where: {
+            startedAt: {
+              isSet: true
+            },
+            endedAt: {
+              isSet: true
+            }
+          }
+        },
       }
     })
 
@@ -18,7 +27,7 @@ const MagicMoverRepository = {
         id
       },
       include: {
-        _count: true
+        missions: true
       }
     })
 
@@ -32,6 +41,7 @@ const MagicMoverRepository = {
           id: mover.id
         },
         data: {
+          name: mover.name,
           weightLimit: mover.weightLimit,
           energy: mover.energy,
           questState: mover.questState
@@ -42,6 +52,7 @@ const MagicMoverRepository = {
     } else {
       const doc = await prismaClient.magicMover.create({
         data: {
+          name: mover.name,
           weightLimit: mover.weightLimit,
           energy: mover.energy,
           questState: mover.questState

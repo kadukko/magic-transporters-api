@@ -15,6 +15,7 @@ datasource db {
 
 model MagicMover {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
   weightLimit   Float
   energy        Int
   questState    QuestState
