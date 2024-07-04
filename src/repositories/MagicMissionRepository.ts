@@ -2,11 +2,6 @@ import prismaClient from "../database/prismaClient"
 import MagicMission, { TMagicMission } from "../entities/MagicMission"
 
 const MagicMissionRepository = {
-  async getAll() {
-    const docs = await prismaClient.magicMission.findMany()
-    return docs.map(doc => new MagicMission(doc as TMagicMission))
-  },
-
   async getById(id:string) {
     const doc = await prismaClient.magicMission.findFirst({
       where: {
@@ -24,10 +19,35 @@ const MagicMissionRepository = {
     return new MagicMission(doc as TMagicMission)
   },
 
+  
+  async getAllByMoverId(moverId: string) {
+    const docs = await prismaClient.magicMission.findMany({
+      where: {
+        moverId 
+      },
+      include: {
+        items: {
+          include: {
+            item: true
+          }
+        }
+      }
+    })
+
+    return docs.map(doc => new MagicMission(doc as TMagicMission))
+  },
+
   async getLastMissionByMoverId (moverId: string) {
     const doc = await prismaClient.magicMission.findFirst({
       where: {
         moverId: moverId
+      },
+      include: {
+        items: {
+          include: {
+            item: true
+          }
+        }
       },
       orderBy: {
         id: 'desc'
