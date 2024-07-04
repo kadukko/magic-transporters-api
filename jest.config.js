@@ -5,5 +5,6 @@ const config = {
     transform: {
         '^.+\\.ts?$': 'ts-jest',
     },
+    testPathIgnorePatterns: ['dist']
 };
 exports.default = config;
