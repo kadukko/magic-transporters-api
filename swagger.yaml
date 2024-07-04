@@ -1,0 +1,389 @@
+openapi: 3.0.0
+info:
+  title: Magic Movers API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000
+paths:
+  /magic-movers:
+    post:
+      summary: Create Magic Mover
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Pedro
+                weightLimit:
+                  type: integer
+                  example: 100
+                energy:
+                  type: integer
+                  example: 30
+      responses:
+        '200':
+          description: Magic Mover created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6685fb47692b58c0990d6904
+                  name:
+                    type: string
+                    example: Pedro
+                  weightLimit:
+                    type: integer
+                    example: 100
+                  energy:
+                    type: integer
+                    example: 30
+                  questState:
+                    type: string
+                    enum: [RESTING, LOADING, ON_A_MISSION, DONE]
+                    example: RESTING
+    get:
+      summary: Get Magic Movers
+      responses:
+        '200':
+          description: List of Magic Movers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 6685fbe70f5108c3202841fb
+                    name:
+                      type: string
+                      example: Pedro
+                    weightLimit:
+                      type: integer
+                      example: 100
+                    energy:
+                      type: integer
+                      example: 30
+                    questState:
+                      type: string
+                      enum: [RESTING, LOADING, ON_A_MISSION, DONE]
+                      example: LOADING
+  /magic-items:
+    post:
+      summary: Create Magic Item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Magic book
+                weight:
+                  type: integer
+                  example: 10
+      responses:
+        '200':
+          description: Magic Item created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6685fbe70f5108c3202841fb
+                  name:
+                    type: string
+                    example: Magic book
+                  weight:
+                    type: integer
+                    example: 10
+    get:
+      summary: Get Magic Items
+      responses:
+        '200':
+          description: List of Magic Items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 6685fbe70f5108c3202841fb
+                    name:
+                      type: string
+                      example: Magic book
+                    weight:
+                      type: integer
+                      example: 10
+  /magic-movers/{moverId}/missions:
+    get:
+      summary: Get Magic Mover Missions
+      parameters:
+        - in: path
+          name: moverId
+          required: true
+          schema:
+            type: string
+          example: 6685fb47692b58c0990d6904
+      responses:
+        '200':
+          description: List of Missions for a Magic Mover
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: 6685fb5d692b58c0990d6905
+                    moverId:
+                      type: string
+                      example: 6685fb47692b58c0990d6904
+                    startedAt:
+                      type: string
+                      format: date-time
+                      nullable: true
+                      example: "2024-07-04T01:31:21.766Z"
+                    endedAt:
+                      type: string
+                      format: date-time
+                      nullable: true
+                      example: "2024-07-04T01:31:25.114Z"
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: "2024-07-04T01:31:09.252Z"
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: 6685fb5d692b58c0990d6906
+                          item:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: 6685faf2692b58c0990d6903
+                              name:
+                                type: string
+                                example: Magic staff
+                              weight:
+                                type: integer
+                                example: 30
+                example:
+                  - id: 6685fb5d692b58c0990d6905
+                    moverId: 6685fb47692b58c0990d6904
+                    startedAt: "2024-07-04T01:31:21.766Z"
+                    endedAt: "2024-07-04T01:31:25.114Z"
+                    createdAt: "2024-07-04T01:31:09.252Z"
+                    items:
+                      - id: 6685fb5d692b58c0990d6906
+                        item:
+                          id: 6685faf2692b58c0990d6903
+                          name: Magic staff
+                          weight: 30
+                  - id: 6685fc3c892d89218a82ed82
+                    moverId: 6685fb47692b58c0990d6904
+                    startedAt: null
+                    endedAt: null
+                    createdAt: "2024-07-04T01:34:52.636Z"
+                    items:
+                      - id: 6685fc3c892d89218a82ed83
+                        item:
+                          id: 6685fbe70f5108c3202841fb
+                          name: Magic book
+                          weight: 10
+  /magic-movers/{moverId}/current-mission:
+    get:
+      summary: Get Magic Mover Current Mission
+      parameters:
+        - in: path
+          name: moverId
+          required: true
+          schema:
+            type: string
+          example: 6685fb47692b58c0990d6904
+      responses:
+        '200':
+          description: Current Mission for a Magic Mover
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 6685fc3c892d89218a82ed82
+                  moverId:
+                    type: string
+                    example: 6685fb47692b58c0990d6904
+                  startedAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                    example: null
+                  endedAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                    example: null
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: "2024-07-04T01:34:52.636Z"
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 6685fc3c892d89218a82ed83
+                        item:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: 6685fbe70f5108c3202841fb
+                            name:
+                              type: string
+                              example: Magic book
+                            weight:
+                              type: integer
+                              example: 10
+                example:
+                  id: 6685fc3c892d89218a82ed82
+                  moverId: 6685fb47692b58c0990d6904
+                  startedAt: null
+                  endedAt: null
+                  createdAt: "2024-07-04T01:34:52.636Z"
+                  items:
+                    - id: 6685fc3c892d89218a82ed83
+                      item:
+                        id: 6685fbe70f5108c3202841fb
+                        name: Magic book
+                        weight: 10
+  /magic-movers/{moverId}/load-item:
+    post:
+      summary: Load magic item
+      parameters:
+        - in: path
+          name: moverId
+          required: true
+          schema:
+            type: string
+          example: 6685fb47692b58c0990d6904
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId:
+                  type: string
+                  example: 6685fbe70f5108c3202841fb
+      responses:
+        '200':
+          description: Magic item loaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+  /magic-movers/{moverId}/unload-item:
+    post:
+      summary: Unload magic item
+      parameters:
+        - in: path
+          name: moverId
+          required: true
+          schema:
+            type: string
+          example: 6685fb47692b58c0990d6904
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemOnMissionId:
+                  type: string
+                  example: 6685faf2692b58c0990d6903
+      responses:
+        '200':
+          description: Magic item unloaded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+  /magic-movers/{moverId}/start-mission:
+    post:
+      summary: Start Magic Mover Mission
+      parameters:
+        - in: path
+          name: moverId
+          required: true
+          schema:
+            type: string
+          example: 6685fb47692b58c0990d6904
+      responses:
+        '200':
+          description: Magic Mover Mission started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+  /magic-movers/{moverId}/end-mission:
+    post:
+      summary: End Magic Mover Mission
+      parameters:
+        - in: path
+          name: moverId
+          required: true
+          schema:
+            type: string
+          example: 6685fb47692b58c0990d6904
+      responses:
+        '200':
+          description: Magic Mover Mission ended successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
