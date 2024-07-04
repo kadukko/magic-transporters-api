@@ -9,9 +9,12 @@ import StartMagicMoverMissionController from "./controllers/StartMagicMoverMissi
 import EndMagicMoverMissionController from "./controllers/EndMagicMoverMissionController"
 import GetAllMagicMoverMissionsController from "./controllers/GetAllMagicMoverMissionsController"
 import GetMagicMoverCurrentMissionController from "./controllers/GetMagicMoverCurrentMissionController"
+import path from "node:path"
 
 export default {
   applyMiddleware(server: Express) {
+    server.get('/', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')))
+
     server.get('/magic-movers', GetAllMagicMoversController.handler)
     server.post('/magic-movers', CreateMagicMoverController.handler)
 

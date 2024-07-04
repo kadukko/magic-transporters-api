@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic Transporters</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="max-w-screen-xl flex flex-col gap-y-5 p-5 mx-auto">
+    <h1 class="font-bold text-xl">
+      Magic Transporters API
+    </h1>
+
+    <div class="w-100 grid grid-cols-3 gap-3">
+      <form id="create-mover-form" class="rounded overflow-hidden shadow-lg bg-white p-3 flex flex-col gap-y-3 border-2">
+        <h2 class="font-bold">Create Magic Mover</h2>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Name</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="name" required />
+        </div>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Energy</label> 
+          <input type="number" class="flex-1 border-2 px-2" name="energy" value="0" step="1" min="0" required />
+        </div>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Weight limit</label> 
+          <input type="number" class="flex-1 border-2 px-2" name="weightLimit" value="0" step="1" min="0" required />
+        </div>
+        <button type="submit" class="border-2">Create</button>
+      </form>
+
+      <form id="create-item-form" class="rounded overflow-hidden shadow-lg bg-white p-3 flex flex-col gap-y-3 border-2">
+        <h2 class="font-bold">Create Magic Item</h2>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Name</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="name" required />
+        </div>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Weight</label> 
+          <input type="number" class="flex-1 border-2 px-2" name="weight" value="0" step="1" min="0" required />
+        </div>
+        <button type="submit" class="border-2">Create</button>
+      </form>
+      
+      <form id="load-mover-form" class="rounded overflow-hidden shadow-lg bg-white p-3 flex flex-col gap-y-3 border-2">
+        <h2 class="font-bold">Load Magic Mover</h2>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Magic Mover ID</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="moverId" required />
+        </div>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Magic Item ID</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="itemId" required />
+        </div>
+        <button type="submit" class="border-2">Confirm</button>
+      </form>
+      
+      <form id="unload-mover-form" class="rounded overflow-hidden shadow-lg bg-white p-3 flex flex-col gap-y-3 border-2">
+        <h2 class="font-bold">Unload Magic Mover</h2>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Magic Mover ID</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="moverId" required />
+        </div>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Magic Item ID</label>
+          <input type="text" class="flex-1 border-2 px-2" name="itemId" required />
+        </div>
+        <button type="submit" class="border-2">Confirm</button>
+      </form>
+      
+      <form id="start-mission-form" class="rounded overflow-hidden shadow-lg bg-white p-3 flex flex-col gap-y-3 border-2">
+        <h2 class="font-bold">Start Magic Mover Mission</h2>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Magic Mover ID</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="moverId" required />
+        </div>
+        <button type="submit" class="border-2">Start</button>
+      </form>
+      
+    
+      <form id="end-mission-form" class="rounded overflow-hidden shadow-lg bg-white p-3 flex flex-col gap-y-3 border-2">
+        <h2 class="font-bold">Stop Magic Mover Mission</h2>
+        <div class="flex align-center gap-x-3">
+          <label class="w-4/12">Magic Mover ID</label> 
+          <input type="text" class="flex-1 border-2 px-2" name="moverId" required />
+        </div>
+        <button type="submit" class="border-2">Stop</button>
+      </form>
+    </div>
+
+    <div class="w-full rounded overflow-hidden shadow-lg bg-white p-3 w-full flex flex-col gap-y-3 border-2 text-center">
+      <h2 class="font-bold">Magic Mover Table</h2>
+      <table id="magic-movers">
+        <thead>
+          <tr>
+            <th class="w-1">ID</th>
+            <th>Name</th>
+            <th>Energy</th>
+            <th>Weight Limit</th>
+            <th>Quest State</th>
+            <th>Completed missions</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="w-full rounded overflow-hidden shadow-lg bg-white p-3 w-full flex flex-col gap-y-3 border-2 text-center">
+      <h2 class="font-bold">Magic Item Table</h2>
+      <table id="magic-items">
+        <thead>
+          <tr>
+            <th class="w-1">ID</th>
+            <th>Name</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+
+    
+  </div>
+
+  <script src="/js/jquery-3.7.1.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
