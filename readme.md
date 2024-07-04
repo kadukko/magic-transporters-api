@@ -1,6 +1,6 @@
 # Magic Transporters API Documentation
 
-Welcome to the Magic Transporters API documentation. This API allows you to manage and interact with the transportation services offered by Magic Transporters. The API provides endpoints for user management, booking transport, tracking transport status, and more.
+Welcome to the Magic Transporters API documentation. This API project was developed to test my knowledge for a Node.js Developer position at Unifi Solutions. The API allows you to manage and interact with the transportation services offered by Magic Transporters.
 
 ## Table of Contents
 
