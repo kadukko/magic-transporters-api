@@ -9,12 +9,16 @@ class CreateMagicMoverController {
   static async handler (req: Request, res: Response) {
     try {
       const body = req.body as TRequestBody
-      const mover = new MagicMover({...body, questState: 'RESTING'})
-      res.json(await MagicMoverRepository.save(mover))
+      res.json(await this.logic(body))
     } catch (err) {
       res.status(500).send('INTERNAL_ERROR')
       LoggerModule.error(err)
     }
+  }
+
+  static async logic (moverInput: TRequestBody) {
+    const mover = new MagicMover({...moverInput, questState: 'RESTING'})
+    return await MagicMoverRepository.save(mover)
   }
 }
 

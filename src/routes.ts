@@ -8,7 +8,7 @@ import UnloadMagicMoverController from "./controllers/UnloadMagicMoverController
 import StartMagicMoverMissionController from "./controllers/StartMagicMoverMissionController"
 import EndMagicMoverMissionController from "./controllers/EndMagicMoverMissionController"
 import GetAllMagicMoverMissionsController from "./controllers/GetAllMagicMoverMissionsController"
-import GetAllMagicMoverCurrentMissionController from "./controllers/GetAllMagicMoverCurrentMissionController"
+import GetMagicMoverCurrentMissionController from "./controllers/GetMagicMoverCurrentMissionController"
 
 export default {
   applyMiddleware(server: Express) {
@@ -25,6 +25,6 @@ export default {
     server.post('/magic-movers/:id/end-mission', EndMagicMoverMissionController.handler)
   
     server.get('/magic-movers/:id/missions', GetAllMagicMoverMissionsController.handler)
-    server.get('/magic-movers/:id/current-mission', GetAllMagicMoverCurrentMissionController.handler)
+    server.get('/magic-movers/:id/current-mission', GetMagicMoverCurrentMissionController.handler)
   }
 }

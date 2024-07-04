@@ -6,15 +6,19 @@ import MagicMover from "../entities/MagicMover"
 class GetAllMagicMoversController {
   static async handler (req: Request, res: Response) {
     try {
-      const movers = await MagicMoverRepository.getAll()
-        .then(movers => movers.map(redactMagicMover))
-        .then(movers => movers.sort((a, b) => b.totalMissions - a.totalMissions))
-
-      res.json(movers)
+      res.json(await this.logic())
     } catch (err) {
       res.status(500).send('INTERNAL_ERROR')
       LoggerModule.error(err)
     }
+  }
+
+  static async logic () {
+    const movers = await MagicMoverRepository.getAll()
+      .then(movers => movers.map(redactMagicMover))
+      .then(movers => movers.sort((a, b) => b.totalMissions - a.totalMissions))
+
+    return movers
   }
 }
 

@@ -2,11 +2,10 @@ import type { Request, Response } from "express"
 import MagicMoverRepository from "../repositories/MagicMoverRepository"
 import LoggerModule from "../modules/LoggerModule"
 import MagicMissionRepository from "../repositories/MagicMissionRepository"
-import MagicItemOnMission from "../entities/MagicItemOnMission"
 import MagicMission from "../entities/MagicMission"
 import APIError from "../classes/errors/APIError"
 
-class GetAllMagicMoverMissionsController {
+class GetMagicMoverCurrentMissionController {
   static async handler (req: Request, res: Response) {
     try {
       const { id } = req.params
@@ -26,9 +25,11 @@ class GetAllMagicMoverMissionsController {
 
     if (!mover || !mover.id) throw new APIError('MAGIC_MOVER_NOT_FOUND', 404)
 
-    const missions = await MagicMissionRepository.getAllByMoverId(mover.id)
+    if (['RESTING', 'DONE'].includes(mover.questState)) throw new APIError('MISSION_NOT_FOUND', 404)
 
-    return missions.map(redactMission)
+    const mission = await MagicMissionRepository.getLastMissionByMoverId(mover.id)
+
+    return redactMission(mission)
   }
 }
 
@@ -43,4 +44,4 @@ const redactMission = (mission: MagicMission) => {
   }
 }
 
-export default GetAllMagicMoverMissionsController
+export default GetMagicMoverCurrentMissionController
