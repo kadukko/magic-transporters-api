@@ -141,6 +141,13 @@ paths:
             type: string
           example: 6685fb47692b58c0990d6904
       responses:
+        '404':
+          description: Magic Mover not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: MAGIC_MOVER_NOT_FOUND
         '200':
           description: List of Missions for a Magic Mover
           content:
@@ -224,6 +231,13 @@ paths:
             type: string
           example: 6685fb47692b58c0990d6904
       responses:
+        '404':
+          description: 1. Magic Mover; 2. Mission not found.
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_NOT_FOUND; 2. MISSION_NOT_FOUND
         '200':
           description: Current Mission for a Magic Mover
           content:
@@ -304,6 +318,20 @@ paths:
                   type: string
                   example: 6685fbe70f5108c3202841fb
       responses:
+        '404':
+          description: 1. Magic Mover not found; 2. Magic Item not found; 3. Mission not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_NOT_FOUND; 2. MAGIC_ITEM_NOT_FOUND; 3. MISSION_NOT_FOUND
+        '400':
+          description: Not allowed to load the Magic Item
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. TOO_HEAVY_ITEM; 2. WEIGHT_LIMIT_EXCEEDED; 3. MAGIC_MOVER_HAS_ALREADY_ON_MISSION
         '200':
           description: Magic item loaded successfully
           content:
@@ -335,6 +363,20 @@ paths:
                   type: string
                   example: 6685faf2692b58c0990d6903
       responses:
+        '404':
+          description: 1. Magic Mover not found; 2. Magic Item on Mission not found;
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_NOT_FOUND; 2. MAGIC_ITEM_ON_MISSION_NOT_FOUND;
+        '400':
+          description: Not allowed to unload the Magic Item
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_IS_NOT_LOADING; 2. MAGIC_MISSION_HAS_ALREADY_STARTED;
         '200':
           description: Magic item unloaded successfully
           content:
@@ -356,6 +398,20 @@ paths:
             type: string
           example: 6685fb47692b58c0990d6904
       responses:
+        '404':
+          description: 1. Magic Mover not found; 2. Mission not found;
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_NOT_FOUND; 2. MISSION_NOT_FOUND;
+        '400':
+          description: Not allowed to start the Mission
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_IS_NOT_LOADING; 2. MISSION_HAS_ALREADY_STARTED;
         '200':
           description: Magic Mover Mission started successfully
           content:
@@ -377,6 +433,20 @@ paths:
             type: string
           example: 6685fb47692b58c0990d6904
       responses:
+        '404':
+          description: 1. Magic Mover not found; 2. Mission not found;
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_NOT_FOUND; 2. MISSION_NOT_FOUND;
+        '400':
+          description: Not allowed to end the mission
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 1. MAGIC_MOVER_IS_NOT_ON_MISSION; 2. MISSION_IS_NOT_STARTED; 3. MISSION_HAS_ALREADY_ENDED;
         '200':
           description: Magic Mover Mission ended successfully
           content:

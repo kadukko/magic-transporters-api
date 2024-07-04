@@ -30,7 +30,7 @@ class LoadMatchMoverController {
       let mission = null
       let itemOnMission = null
 
-      if (['ON_A_MISSION', 'DONE'].includes(mover.questState)) return res.status(400).send('NOT_ALLOWED')
+      if (['ON_A_MISSION'].includes(mover.questState)) return res.status(400).send('MAGIC_MOVER_HAS_ALREADY_ON_MISSION')
 
       if (mover.questState === 'LOADING') {
         mission = await MagicMissionRepository.getLastMissionByMoverId(mover.id)

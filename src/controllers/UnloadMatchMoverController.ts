@@ -17,13 +17,13 @@ class UnloadMatchMoverController {
 
       if (!mover || !mover.id) return res.status(404).send('MAGIC_MOVER_NOT_FOUND')
 
-      if (mover.questState !== `LOADING`) return res.status(400).send(`NOT_ALLOWED`)
+      if (mover.questState !== `LOADING`) return res.status(400).send(`MAGIC_MOVER_IS_NOT_LOADING`)
 
       const itemOnMission =  await MagicItemOnMissionRepository.getById(itemOnMissionId)
 
       if (!itemOnMission || !itemOnMission.id) return res.status(404).send('MAGIC_ITEM_ON_MISSION_NOT_FOUND')
 
-      if (itemOnMission.mission?.startedAt) return res.status(400).send('MAGIC_MISSION_HAS_ALREADY_STARTED')
+      if (itemOnMission.mission?.startedAt) return res.status(400).send('MISSION_HAS_ALREADY_STARTED')
 
       if (!await MagicItemOnMissionRepository.deleteById(itemOnMission.id)) return res.status(500).send(`FAILED_TO_REMOVE_ITEM`)
 
