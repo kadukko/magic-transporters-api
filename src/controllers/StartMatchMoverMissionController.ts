@@ -1,32 +1,39 @@
 import type { Request, Response } from "express"
 import MagicMoverRepository from "../repositories/MagicMoverRepository"
 import MagicMissionRepository from "../repositories/MagicMissionRepository"
+import LoggerModule from "../modules/LoggerModule"
 
 class StartMatchMoverMissionController {
   static async handler (req: Request, res: Response) {
-    const { id } = req.params
+    try {
+      const { id } = req.params
 
-    const mover = await MagicMoverRepository.getById(id)
+      const mover = await MagicMoverRepository.getById(id)
 
-    if (!mover || !mover.id) return res.status(404).send('MAGIC_MOVER_NOT_FOUND')
+      if (!mover || !mover.id) return res.status(404).send('MAGIC_MOVER_NOT_FOUND')
 
-    if (mover.questState !== 'LOADING') return res.status(400).send('NOT_ALLOWED')
+      if (mover.questState !== 'LOADING') return res.status(400).send('NOT_ALLOWED')
 
-    const mission = await MagicMissionRepository.getLastMissionByMoverId(id)
+      const mission = await MagicMissionRepository.getLastMissionByMoverId(id)
 
-    if (!mission || !mission.id) return res.status(404).send('MISSION_NOT_FOUND')
+      if (!mission || !mission.id) return res.status(404).send('MISSION_NOT_FOUND')
 
-    if (mission.startedAt) return res.status(500).send('MISSION_HAS_ALREADY_STARTED')
+      if (mission.startedAt) return res.status(500).send('MISSION_HAS_ALREADY_STARTED')
 
-    mission.startedAt = new Date()
+      mission.startedAt = new Date()
 
-    await MagicMissionRepository.save(mission)
+      await MagicMissionRepository.save(mission)
 
-    mover.questState = 'ON_A_MISSION'
+      mover.questState = 'ON_A_MISSION'
 
-    await MagicMoverRepository.save(mover)
+      await MagicMoverRepository.save(mover)
 
-    res.json({ success: true })
+      res.json({ success: true })
+      
+    } catch (err) {
+      res.status(500).send('INTERNAL_ERROR')
+      LoggerModule.error(err)
+    }
   }
 }
 
