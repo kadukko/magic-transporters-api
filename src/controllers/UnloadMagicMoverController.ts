@@ -7,7 +7,7 @@ type TRequestBody = {
   itemOnMissionId: string
 }
 
-class UnloadMatchMoverController {
+class UnloadMagicMoverController {
   static async handler (req: Request, res: Response) {
     try {
       const { id } = req.params
@@ -36,4 +36,4 @@ class UnloadMatchMoverController {
   }
 }
 
-export default UnloadMatchMoverController
+export default UnloadMagicMoverController

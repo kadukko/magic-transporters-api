@@ -11,7 +11,7 @@ type TRequestBody = {
   itemId: string
 }
 
-class LoadMatchMoverController {
+class LoadMagicMoverController {
   static async handler (req: Request, res: Response) {
     try {
       const { id } = req.params
@@ -86,4 +86,4 @@ class LoadMatchMoverController {
   }
 }
 
-export default LoadMatchMoverController
+export default LoadMagicMoverController
