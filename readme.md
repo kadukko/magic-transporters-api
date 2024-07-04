@@ -21,6 +21,7 @@ Before you begin, ensure you have the following installed on your machine:
 - Node.js (v18.x or later)
 - npm (v6.x or later)
 - Prisma CLI
+- MongoDB Server
 
 ### Clone the Repository
 
