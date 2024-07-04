@@ -10,6 +10,6 @@ app.use(express.json())
 routes.applyMiddleware(app)
 
 const swaggerFilename = path.join(__dirname, '../swagger.yaml')
-app.use('/', swaggerUI.serve, swaggerUI.setup(YAML.load(swaggerFilename)))
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(YAML.load(swaggerFilename)))
 
 export default app
