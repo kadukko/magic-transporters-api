@@ -27,7 +27,7 @@ Before you begin, ensure you have the following installed on your machine:
 First, clone the Magic Transporters API repository from GitHub:
 
 ```bash
-git clone https://github.com/your-username/magic-transporters-api.git
+git clone https://github.com/kadukko/magic-transporters-api.git
 cd magic-transporters-api
 ```
 
