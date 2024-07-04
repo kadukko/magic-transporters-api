@@ -120,13 +120,7 @@ The API uses standard HTTP status codes to indicate the success or failure of an
 
 ## Automated Testing
 
-Automated tests are crucial for ensuring the reliability and stability of the Magic Transporters API. We use Jest for our testing framework. To run the automated tests, use the following command:
-
-```bash
-npm run test
-```
-
-This command will execute all the test cases defined in the project.
+Automated tests are crucial for ensuring the reliability and stability of the Magic Transporters API. We use Jest for our testing framework.
 
 ### Controller Tests
 
